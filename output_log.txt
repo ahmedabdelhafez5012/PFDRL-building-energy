@@ -1,0 +1,66 @@
+STAGE A: Inspecting residential data sources
+
+  Already downloaded: data/residential_expansion_raw\ausgrid_raw.zip
+
+Ausgrid zip contains 6 file(s):
+  Ausgrid solar home electricity data notes (Aug 2014).pdf
+  README.md
+  Solar home 2010-2011.csv
+  Solar home 2011-2012.csv
+  Solar home 2012-2013.csv
+  Solar home monthly data  2007 to 2014.ZIP
+
+======================================================================
+Inspecting: data/residential_expansion_raw\Solar home 2010-2011.csv
+======================================================================
+Columns: ['2010-2011 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52']
+
+First rows:
+  2010-2011 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"  ... Unnamed: 52
+0                                           Customer                                                                                                                ...        0:00
+1                                                  1                                                                                                                ...       0.125
+2                                                  1                                                                                                                ...       1.075
+3                                                  1                                                                                                                ...           0
+4                                                  1                                                                                                                ...       0.111
+
+[5 rows x 53 columns]
+
+======================================================================
+Inspecting: data/residential_expansion_raw\Solar home 2011-2012.csv
+======================================================================
+Columns: ['2011-2012 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53']
+
+First rows:
+  2011-2012 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"  ...  Unnamed: 53
+0                                           Customer                                                                                                                ...  Row Quality
+1                                                  1                                                                                                                ...          NaN
+2                                                  1                                                                                                                ...          NaN
+3                                                  1                                                                                                                ...          NaN
+4                                                  1                                                                                                                ...          NaN
+
+[5 rows x 54 columns]
+
+======================================================================
+Inspecting: data/residential_expansion_raw\Solar home 2012-2013.csv
+======================================================================
+Columns: ['2012-2013 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19', 'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', 'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27', 'Unnamed: 28', 'Unnamed: 29', 'Unnamed: 30', 'Unnamed: 31', 'Unnamed: 32', 'Unnamed: 33', 'Unnamed: 34', 'Unnamed: 35', 'Unnamed: 36', 'Unnamed: 37', 'Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48', 'Unnamed: 49', 'Unnamed: 50', 'Unnamed: 51', 'Unnamed: 52', 'Unnamed: 53']
+
+First rows:
+  2012-2013 Solar home electricity data - Before using this data, please read the attached pdf document "Ausgrid solar home electricity data notes (Aug 2014).pdf"  ...  Unnamed: 53
+0                                           Customer                                                                                                                ...  Row Quality
+1                                                  1                                                                                                                ...          NaN
+2                                                  1                                                                                                                ...          NaN
+3                                                  1                                                                                                                ...          NaN
+4                                                  1                                                                                                                ...          NaN
+
+[5 rows x 54 columns]
+
+======================================================================
+Checking for local Pecan Street sample in data/pecan_street_sample/
+======================================================================
+  NOT FOUND. Please download the Kaggle sample first:
+  https://www.kaggle.com/datasets/pecanstreetinc/ps-data-10-homes-1min-frequency-aug-2018
+  and unzip its contents into: data/pecan_street_sample/
+
+
+Done. Share this output so we can confirm exact column names before writing the full combination pipeline (09b).

@@ -1,0 +1,12 @@
+data/
+__pycache__/
+*.pt
+*.pth
+*.npy
+*.npz
+*.pkl
+*.zip
+*.csv
+*.log
+.venv/
+venv/

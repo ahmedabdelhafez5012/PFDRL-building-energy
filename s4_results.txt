@@ -1,0 +1,61 @@
+==============================================================================
+Scenario S4 - epsilon-sweep (privacy-utility frontier)
+Epsilon values: [None, 8.0, 4.0, 1.0] (None = no DP / infinite epsilon)
+Per-epsilon budget: 50 rounds x 5000 steps
+==============================================================================
+
+--- no-DP (inf) ---
+  residential  | mean cost/ep =      5.273 (std 2.216)
+  office       | mean cost/ep =    505.512 (std 85.270)
+  commercial   | mean cost/ep =    325.393 (std 69.343)
+  mixed-use    | mean cost/ep =   1276.612 (std 336.258)
+  (comm cost this run: 3.7117 MB)
+
+--- eps=8.0 ---
+  residential  | mean cost/ep =      5.196 (std 1.501)
+  office       | mean cost/ep =    506.409 (std 64.738)
+  commercial   | mean cost/ep =    373.390 (std 72.548)
+  mixed-use    | mean cost/ep =   1250.725 (std 319.626)
+  (comm cost this run: 3.7117 MB)
+
+--- eps=4.0 ---
+  residential  | mean cost/ep =      2.935 (std 1.677)
+  office       | mean cost/ep =    422.903 (std 55.558)
+  commercial   | mean cost/ep =    366.938 (std 69.440)
+  mixed-use    | mean cost/ep =   1267.230 (std 333.075)
+  (comm cost this run: 3.7117 MB)
+
+--- eps=1.0 ---
+  residential  | mean cost/ep =      5.145 (std 2.211)
+  office       | mean cost/ep =    437.710 (std 56.708)
+  commercial   | mean cost/ep =    262.142 (std 50.277)
+  mixed-use    | mean cost/ep =   1639.835 (std 410.595)
+  (comm cost this run: 3.7117 MB)
+
+==============================================================================
+PRIVACY-UTILITY FRONTIER SUMMARY
+==============================================================================
+
+residential:
+  no-DP      -> mean cost/ep = 5.273 (std 2.216)
+  eps=8.0    -> mean cost/ep = 5.196 (std 1.501)
+  eps=4.0    -> mean cost/ep = 2.935 (std 1.677)
+  eps=1.0    -> mean cost/ep = 5.145 (std 2.211)
+
+office:
+  no-DP      -> mean cost/ep = 505.512 (std 85.270)
+  eps=8.0    -> mean cost/ep = 506.409 (std 64.738)
+  eps=4.0    -> mean cost/ep = 422.903 (std 55.558)
+  eps=1.0    -> mean cost/ep = 437.710 (std 56.708)
+
+commercial:
+  no-DP      -> mean cost/ep = 325.393 (std 69.343)
+  eps=8.0    -> mean cost/ep = 373.390 (std 72.548)
+  eps=4.0    -> mean cost/ep = 366.938 (std 69.440)
+  eps=1.0    -> mean cost/ep = 262.142 (std 50.277)
+
+mixed-use:
+  no-DP      -> mean cost/ep = 1276.612 (std 336.258)
+  eps=8.0    -> mean cost/ep = 1250.725 (std 319.626)
+  eps=4.0    -> mean cost/ep = 1267.230 (std 333.075)
+  eps=1.0    -> mean cost/ep = 1639.835 (std 410.595)

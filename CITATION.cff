@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "PFDRL: code for federated deep reinforcement learning for building energy management (M.Sc. thesis)"
+type: software
+authors:
+  - family-names: Khater
+    given-names: Ahmed Abdelhafez Ahmed Abdelgawad
+version: 1.0.0
+date-released: 2026-11-06
+license: MIT
+repository-code: "https://github.com/ahmedabdelhafez5012/pfdrl-building-energy"

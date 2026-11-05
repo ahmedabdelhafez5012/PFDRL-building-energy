@@ -1,0 +1,64 @@
+==============================================================================
+Multi-seed H2 test: personalised (mu_hat*) vs non-personalised (mu=1.0)
+N_SEEDS=8
+==============================================================================
+
+--- Seed 0 ---
+  residential  | personalised(mu=0.80)=     4.870 | non-personalised(mu=1.0)=     4.340
+  office       | personalised(mu=0.00)=   463.140 | non-personalised(mu=1.0)=   502.796
+  commercial   | personalised(mu=0.01)=   340.202 | non-personalised(mu=1.0)=   344.543
+  mixed-use    | personalised(mu=0.01)=  1292.209 | non-personalised(mu=1.0)=  1161.077
+
+--- Seed 1 ---
+  residential  | personalised(mu=0.80)=     3.551 | non-personalised(mu=1.0)=     3.675
+  office       | personalised(mu=0.00)=   654.441 | non-personalised(mu=1.0)=   655.910
+  commercial   | personalised(mu=0.01)=   318.361 | non-personalised(mu=1.0)=   311.981
+  mixed-use    | personalised(mu=0.01)=  1127.167 | non-personalised(mu=1.0)=  1104.753
+
+--- Seed 2 ---
+  residential  | personalised(mu=0.80)=     2.397 | non-personalised(mu=1.0)=     3.759
+  office       | personalised(mu=0.00)=   524.114 | non-personalised(mu=1.0)=   511.240
+  commercial   | personalised(mu=0.01)=   398.510 | non-personalised(mu=1.0)=   345.671
+  mixed-use    | personalised(mu=0.01)=  1533.185 | non-personalised(mu=1.0)=  1737.763
+
+--- Seed 3 ---
+  residential  | personalised(mu=0.80)=     2.397 | non-personalised(mu=1.0)=     2.525
+  office       | personalised(mu=0.00)=   558.137 | non-personalised(mu=1.0)=   569.807
+  commercial   | personalised(mu=0.01)=   345.749 | non-personalised(mu=1.0)=   347.616
+  mixed-use    | personalised(mu=0.01)=  1233.582 | non-personalised(mu=1.0)=  1326.324
+
+--- Seed 4 ---
+  residential  | personalised(mu=0.80)=     3.151 | non-personalised(mu=1.0)=     3.851
+  office       | personalised(mu=0.00)=   456.217 | non-personalised(mu=1.0)=   484.504
+  commercial   | personalised(mu=0.01)=   327.667 | non-personalised(mu=1.0)=   320.050
+  mixed-use    | personalised(mu=0.01)=  1095.551 | non-personalised(mu=1.0)=  1169.762
+
+--- Seed 5 ---
+  residential  | personalised(mu=0.80)=     4.151 | non-personalised(mu=1.0)=     4.150
+  office       | personalised(mu=0.00)=   519.970 | non-personalised(mu=1.0)=   534.745
+  commercial   | personalised(mu=0.01)=   342.341 | non-personalised(mu=1.0)=   282.346
+  mixed-use    | personalised(mu=0.01)=  1351.348 | non-personalised(mu=1.0)=  1249.720
+
+--- Seed 6 ---
+  residential  | personalised(mu=0.80)=     3.641 | non-personalised(mu=1.0)=     4.368
+  office       | personalised(mu=0.00)=   536.780 | non-personalised(mu=1.0)=   613.622
+  commercial   | personalised(mu=0.01)=   315.134 | non-personalised(mu=1.0)=   343.312
+  mixed-use    | personalised(mu=0.01)=  1426.944 | non-personalised(mu=1.0)=  1218.592
+
+--- Seed 7 ---
+  residential  | personalised(mu=0.80)=     3.592 | non-personalised(mu=1.0)=     3.508
+  office       | personalised(mu=0.00)=   498.895 | non-personalised(mu=1.0)=   521.827
+  commercial   | personalised(mu=0.01)=   321.625 | non-personalised(mu=1.0)=   312.457
+  mixed-use    | personalised(mu=0.01)=  1569.974 | non-personalised(mu=1.0)=  1291.189
+
+==============================================================================
+WILCOXON SIGNED-RANK TEST RESULTS (H2: personalised < non-personalised)
+==============================================================================
+  residential  | personalised=3.469(+/-0.781) | non-pers.=3.772(+/-0.555) | p=0.1953 | not significant | personalised lower (supports H2)
+  office       | personalised=526.462(+/-58.352) | non-pers.=549.307(+/-55.565) | p=0.0391 | SIGNIFICANT (p<0.05) | personalised lower (supports H2)
+  commercial   | personalised=338.699(+/-25.062) | non-pers.=325.997(+/-21.848) | p=0.2500 | not significant | non-personalised lower (contradicts H2)
+  mixed-use    | personalised=1328.745(+/-164.143) | non-pers.=1282.398(+/-184.887) | p=0.3828 | not significant | non-personalised lower (contradicts H2)
+
+Raw per-seed values:
+Personalised: {'residential': [4.870180022917891, 3.550604269718587, 2.3969491384087886, 2.3968847514158385, 3.1506411070010483, 4.151333015002757, 3.640956737060949, 3.591698209829184], 'office': [463.1399358344123, 654.4406566801329, 524.1142722947176, 558.1373028130472, 456.21651595081596, 519.9700101829322, 536.7804295029925, 498.8946740293976], 'commercial': [340.20220964837534, 318.36124616727614, 398.5099711560472, 345.7487386469462, 327.66702651338517, 342.34138395978704, 315.13412822437834, 321.62474297482976], 'mixed-use': [1292.2085179392907, 1127.1670808605656, 1533.1845140669589, 1233.5817885778613, 1095.5511930946343, 1351.347912720412, 1426.9440241682128, 1569.9735701702182]}
+Non-personalised: {'residential': [4.339936395271325, 3.6748944438996576, 3.7589583238924833, 2.5248607159956835, 3.851095341716499, 4.150400127717984, 4.368015060768203, 3.5084427149437003], 'office': [502.7961618239612, 655.9100739206411, 511.24024051240303, 569.8070325698486, 484.5042991440172, 534.7451720812358, 613.6223926013852, 521.8273743299256], 'commercial': [344.54317026431744, 311.98060671292734, 345.67130390325696, 347.6158807173717, 320.0499249812177, 282.3455441399675, 343.3121733647371, 312.45730131366713], 'mixed-use': [1161.077275503552, 1104.7528518626227, 1737.7627519812827, 1326.323721106053, 1169.7623764978737, 1249.720140679461, 1218.5922355476664, 1291.1891688658166]}

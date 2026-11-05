@@ -1,0 +1,7 @@
+s = open("exp_multi.py", encoding="utf-8").read()
+n0 = s.count('h["arch"] + "|" + h["id"], seed)')
+s = s.replace('h["arch"] + "|" + h["id"], seed)', 'h["arch"] + "__" + h["id"], seed)')
+s = s.replace('i.split("|")[0] for i in ids', 'i.split("__")[0] for i in ids')
+s = s.replace('i.startswith(a + "|")', 'i.startswith(a + "__")')
+open("exp_multi.py", "w", encoding="utf-8").write(s)
+print("patched", n0, "occurrence(s) of the file-name pattern")

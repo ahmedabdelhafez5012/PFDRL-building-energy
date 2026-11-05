@@ -1,0 +1,56 @@
+==============================================================================
+Multi-seed H4 test: FedProx vs FedAvg
+N_SEEDS=5, budget/seed=15x3000 steps
+==============================================================================
+
+--- Seed 0 ---
+  Running FedProx...
+  Running FedAvg...
+    residential  | FedProx=     4.470 | FedAvg=     4.693
+    office       | FedProx=   501.541 | FedAvg=   525.496
+    commercial   | FedProx=   334.620 | FedAvg=   351.551
+    mixed-use    | FedProx=  1323.622 | FedAvg=  1278.155
+
+--- Seed 1 ---
+  Running FedProx...
+  Running FedAvg...
+    residential  | FedProx=     3.872 | FedAvg=     3.929
+    office       | FedProx=   640.116 | FedAvg=   586.532
+    commercial   | FedProx=   319.966 | FedAvg=   325.154
+    mixed-use    | FedProx=  1141.419 | FedAvg=  1145.350
+
+--- Seed 2 ---
+  Running FedProx...
+  Running FedAvg...
+    residential  | FedProx=     2.476 | FedAvg=     2.086
+    office       | FedProx=   489.152 | FedAvg=   543.618
+    commercial   | FedProx=   348.433 | FedAvg=   342.803
+    mixed-use    | FedProx=  1679.093 | FedAvg=  1571.968
+
+--- Seed 3 ---
+  Running FedProx...
+  Running FedAvg...
+    residential  | FedProx=     2.058 | FedAvg=     3.111
+    office       | FedProx=   568.393 | FedAvg=   574.956
+    commercial   | FedProx=   350.793 | FedAvg=   371.109
+    mixed-use    | FedProx=  1284.354 | FedAvg=  1388.627
+
+--- Seed 4 ---
+  Running FedProx...
+  Running FedAvg...
+    residential  | FedProx=     3.480 | FedAvg=     3.715
+    office       | FedProx=   502.623 | FedAvg=   517.538
+    commercial   | FedProx=   304.793 | FedAvg=   325.326
+    mixed-use    | FedProx=  1178.296 | FedAvg=  1246.029
+
+==============================================================================
+WILCOXON SIGNED-RANK TEST RESULTS (H4: FedProx < FedAvg in cost)
+==============================================================================
+  residential  | FedProx=3.271(+/-0.888) | FedAvg=3.507(+/-0.872) | p=0.4375 | not significant | FedProx lower (supports H4)
+  office       | FedProx=540.365(+/-57.079) | FedAvg=549.628(+/-27.025) | p=0.4375 | not significant | FedProx lower (supports H4)
+  commercial   | FedProx=331.721(+/-17.405) | FedAvg=343.189(+/-17.286) | p=0.1875 | not significant | FedProx lower (supports H4)
+  mixed-use    | FedProx=1321.357(+/-190.889) | FedAvg=1326.026(+/-145.424) | p=1.0000 | not significant | FedProx lower (supports H4)
+
+Raw per-seed values (for the thesis appendix / reproducibility):
+FedProx: {'residential': [4.470080710788204, 3.871849300852247, 2.475729821404399, 2.0578099186761696, 3.4802932921344123], 'office': [501.54101831345724, 640.1157509643156, 489.1518941374444, 568.3931648555855, 502.62336219135904], 'commercial': [334.6196493049965, 319.96620382973936, 348.4328371781647, 350.79303136599145, 304.79333923972416], 'mixed-use': [1323.6220906512035, 1141.4191047838124, 1679.092968714775, 1284.353861054194, 1178.2962847758622]}
+FedAvg: {'residential': [4.693328153291356, 3.929015882761002, 2.086468709879823, 3.110687411831095, 3.714803008111587], 'office': [525.495547445644, 586.5315666821783, 543.6176336045919, 574.9559670928984, 517.5382091312026], 'commercial': [351.5514823803077, 325.1544907453946, 342.80265278102, 371.1094486433723, 325.3260776485605], 'mixed-use': [1278.1545240965265, 1145.350436675535, 1571.9680625084889, 1388.6271194431135, 1246.0285031283152]}

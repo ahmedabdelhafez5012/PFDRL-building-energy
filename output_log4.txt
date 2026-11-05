@@ -1,0 +1,54 @@
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+C:\Users\AHMED KHATER\OneDrive - Helwan university(Engineering (Helwan))\Desktop\pfdrl_impl\09b_build_residential_expansion.py:72: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  melted["timestamp"] = pd.to_datetime(
+======================================================================
+STEP 1: Calibrating HVAC model on real Pecan Street data
+======================================================================
+Loading Pecan Street real HVAC data...
+  Regression dataset: 730 (home, hour) data points across 10 homes.
+Calibrated model: HVAC_kW = -0.0074 * max(0, T_out - 21.0) + 1.9193   (R^2=0.001, N=730)
+
+======================================================================
+STEP 2: Fetching real Sydney weather (2010-2013)
+======================================================================
+  26304 hourly readings fetched/cached.
+
+======================================================================
+STEP 3: Loading real Ausgrid customers (base load + solar)
+======================================================================
+Found 300 customers with both GC and GG in data/residential_expansion_raw\Solar home 2010-2011.csv
+
+--- Customer 1 ---
+  Saved: data/residential_expansion\residential_ausgrid_customer1_15min.csv (105215 rows, base_kw mean=0.314, pv_kw mean=0.280, hvac_kw mean=1.915)
+
+--- Customer 2 ---
+  Saved: data/residential_expansion\residential_ausgrid_customer2_15min.csv (105215 rows, base_kw mean=0.334, pv_kw mean=0.114, hvac_kw mean=1.915)
+
+--- Customer 3 ---
+  Saved: data/residential_expansion\residential_ausgrid_customer3_15min.csv (105215 rows, base_kw mean=0.148, pv_kw mean=0.084, hvac_kw mean=1.915)
+
+--- Customer 4 ---
+  Saved: data/residential_expansion\residential_ausgrid_customer4_15min.csv (105215 rows, base_kw mean=0.205, pv_kw mean=0.072, hvac_kw mean=1.915)
+
+--- Customer 5 ---
+  Saved: data/residential_expansion\residential_ausgrid_customer5_15min.csv (105215 rows, base_kw mean=0.204, pv_kw mean=0.070, hvac_kw mean=1.915)
+
+Done. Files saved in data/residential_expansion/.
+Next step: adapt data_loader.py's remaining logic (price signal, state normalisation) to these new files, then add them as additional residential clients in 01_full_ablation_b1_b4.py / main_real_federation.py.

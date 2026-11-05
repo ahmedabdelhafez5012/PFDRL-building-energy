@@ -1,0 +1,106 @@
+==============================================================================
+REAL demonstration decisions extracted from trained models
+For use in S5_Study_Materials_Bilingual.docx, Section 5
+==============================================================================
+
+######################################################################
+# Residential Archetype
+######################################################################
+[Using genuinely trained model]
+
+--- Context (for Sec. 5, Step 1) ---
+base load 0.22 kW, HVAC demand 0.23 kW, solar 0.00 kW, price $0.11/kWh, outdoor temp -6.7°C, battery 0% charged, hour 02:00
+
+--- Recommended Action (for Sec. 5, Step 2) ---
+adjust HVAC by -8.0% around nominal demand; discharging battery at 100% of max rate
+
+--- SHAP Global Ranking (for Sec. 5, Step 3) ---
+  time of day            mean|SHAP| = 0.22584
+  solar generation       mean|SHAP| = 0.07824
+  battery state-of-charge mean|SHAP| = 0.03317
+  HVAC demand            mean|SHAP| = 0.01660
+  base (non-HVAC) load   mean|SHAP| = 0.01577
+  electricity price      mean|SHAP| = 0.01473
+  outdoor temperature    mean|SHAP| = 0.00331
+  (SHAP computed in 10.5 ms)
+
+--- LIME Local Explanation (for Sec. 5, Step 4) ---
+  hour_frac <= 0.25              weight=-0.32379 (46% of total influence)
+  price <= 0.26                  weight=+0.15969 (23% of total influence)
+  soc <= 0.00                    weight=-0.09115 (13% of total influence)
+  t_out <= -0.16                 weight=+0.07021 (10% of total influence)
+  0.01 < pv_gen <= 0.01          weight=+0.03720 (5% of total influence)
+  0.22 < hvac_demand <= 0.29     weight=-0.02031 (3% of total influence)
+  base_load <= 0.06              weight=+0.00051 (0% of total influence)
+  (LIME computed in 17.3 ms)
+
+--- Plain-language summary sentence (ready to read aloud) ---
+  "For residential buildings, the system generally weighs time of day and solar generation most heavily. For this specific decision, the top factor was hour_frac <= 0.25."
+
+######################################################################
+# Office Archetype
+######################################################################
+[Using genuinely trained model]
+
+--- Context (for Sec. 5, Step 1) ---
+base load 127.71 kW, HVAC demand 104.49 kW, solar 0.00 kW, price $0.11/kWh, outdoor temp 0.5°C, battery 0% charged, hour 03:00
+
+--- Recommended Action (for Sec. 5, Step 2) ---
+adjust HVAC by -1.1% around nominal demand; discharging battery at 100% of max rate
+
+--- SHAP Global Ranking (for Sec. 5, Step 3) ---
+  base (non-HVAC) load   mean|SHAP| = 0.00000
+  HVAC demand            mean|SHAP| = 0.00000
+  solar generation       mean|SHAP| = 0.00000
+  electricity price      mean|SHAP| = 0.00000
+  outdoor temperature    mean|SHAP| = 0.00000
+  battery state-of-charge mean|SHAP| = 0.00000
+  time of day            mean|SHAP| = 0.00000
+  (SHAP computed in 4.2 ms)
+
+--- LIME Local Explanation (for Sec. 5, Step 4) ---
+  0.44 < base_load <= 0.83       weight=+0.00000 (0% of total influence)
+  0.44 < hvac_demand <= 0.83     weight=+0.00000 (0% of total influence)
+  pv_gen <= 0.00                 weight=+0.00000 (0% of total influence)
+  price <= 0.26                  weight=+0.00000 (0% of total influence)
+  t_out <= 0.03                  weight=+0.00000 (0% of total influence)
+  soc <= 0.00                    weight=+0.00000 (0% of total influence)
+  hour_frac <= 0.25              weight=+0.00000 (0% of total influence)
+  (LIME computed in 10.7 ms)
+
+--- Plain-language summary sentence (ready to read aloud) ---
+  "For office buildings, the system generally weighs base (non-HVAC) load and HVAC demand most heavily. For this specific decision, the top factor was 0.44 < base_load <= 0.83."
+
+######################################################################
+# Commercial Archetype
+######################################################################
+[Using genuinely trained model]
+
+--- Context (for Sec. 5, Step 1) ---
+base load 30.58 kW, HVAC demand 11.60 kW, solar 0.00 kW, price $0.11/kWh, outdoor temp 13.5°C, battery 21% charged, hour 03:00
+
+--- Recommended Action (for Sec. 5, Step 2) ---
+adjust HVAC by +3.6% around nominal demand; charging battery at 19% of max rate
+
+--- SHAP Global Ranking (for Sec. 5, Step 3) ---
+  time of day            mean|SHAP| = 0.25772
+  electricity price      mean|SHAP| = 0.06758
+  battery state-of-charge mean|SHAP| = 0.05764
+  HVAC demand            mean|SHAP| = 0.02968
+  base (non-HVAC) load   mean|SHAP| = 0.02407
+  outdoor temperature    mean|SHAP| = 0.00591
+  solar generation       mean|SHAP| = 0.00000
+  (SHAP computed in 6.4 ms)
+
+--- LIME Local Explanation (for Sec. 5, Step 4) ---
+  price <= 0.26                  weight=+0.38733 (41% of total influence)
+  hour_frac <= 0.25              weight=+0.32121 (34% of total influence)
+  t_out <= 0.35                  weight=+0.09405 (10% of total influence)
+  base_load <= 0.40              weight=+0.09332 (10% of total influence)
+  0.18 < soc <= 0.30             weight=+0.03444 (4% of total influence)
+  hvac_demand <= 0.20            weight=+0.01736 (2% of total influence)
+  pv_gen <= 0.00                 weight=+0.00000 (0% of total influence)
+  (LIME computed in 10.6 ms)
+
+--- Plain-language summary sentence (ready to read aloud) ---
+  "For commercial buildings, the system generally weighs time of day and electricity price most heavily. For this specific decision, the top factor was price <= 0.26."

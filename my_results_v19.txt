@@ -1,0 +1,51 @@
+==========================================================================
+PFDRL Stage-1 REAL federation: 4 genuine building archetypes
+  - Residential (HomeC.csv)
+  - Office (BDG2 Eagle_office_Katheleen)
+  - Commercial (BDG2 Fox_retail_Manie)
+  - Mixed-use (BDG2 Hog_lodging_Shanti)
+Rounds: 6 | local steps/round: 2000 | FedProx mu=0.05 | DP (eps=8.0, delta=1e-05)
+==========================================================================
+Round 1/6 | last-training-episode cost: Residential=98.84, Office=11012.40, Commercial=6556.59, Mixed-use=30412.80 | cumulative comm: 0.0742 MB
+Round 2/6 | last-training-episode cost: Residential=86.34, Office=11257.55, Commercial=7099.60, Mixed-use=25708.61 | cumulative comm: 0.1485 MB
+Round 3/6 | last-training-episode cost: Residential=72.97, Office=10633.53, Commercial=6945.35, Mixed-use=31690.77 | cumulative comm: 0.2227 MB
+Round 4/6 | last-training-episode cost: Residential=85.19, Office=11390.12, Commercial=6961.54, Mixed-use=27704.27 | cumulative comm: 0.2969 MB
+Round 5/6 | last-training-episode cost: Residential=68.88, Office=11292.81, Commercial=7183.40, Mixed-use=28135.48 | cumulative comm: 0.3712 MB
+Round 6/6 | last-training-episode cost: Residential=81.60, Office=12604.38, Commercial=7171.04, Mixed-use=28871.17 | cumulative comm: 0.4454 MB
+
+Normalised comparison (cost per 1000 sqft, using round-6's per-client cost / building floor area - this is the fair, comparable metric, NOT the raw costs above):
+  Residential (HomeC.csv)                    |   2,300 sqft (US Census average single-family home (HomeC.csv has no metadata; documented estimate)) | cost/1000sqft =   35.480
+  Office (BDG2 Eagle_office_Katheleen)       |  45,240 sqft (BDG2 metadata.csv (real)) | cost/1000sqft =  278.611
+  Commercial (BDG2 Fox_retail_Manie)         |  45,224 sqft (BDG2 metadata.csv (real)) | cost/1000sqft =  158.567
+  Mixed-use (BDG2 Hog_lodging_Shanti)        | 262,156 sqft (BDG2 metadata.csv (real)) | cost/1000sqft =  110.130
+
+==========================================================================
+CLEAN HELD-OUT EVALUATION (no exploration noise, disjoint seed,
+15 episodes per archetype) - this is the metric to report,
+not the noisy training-episode costs printed above.
+==========================================================================
+  Residential (HomeC.csv)                    | mean cost/ep =      4.096 (std 2.901) | mean discomfort =    5.272 | cost/1000sqft =    1.781
+  Office (BDG2 Eagle_office_Katheleen)       | mean cost/ep =    608.607 (std 230.301) | mean discomfort =  416.243 | cost/1000sqft =   13.453
+  Commercial (BDG2 Fox_retail_Manie)         | mean cost/ep =    357.821 (std 55.875) | mean discomfort =  185.376 | cost/1000sqft =    7.912
+  Mixed-use (BDG2 Hog_lodging_Shanti)        | mean cost/ep =   1339.977 (std 274.896) | mean discomfort =  401.286 | cost/1000sqft =    5.111
+
+Trained actor/critic weights saved (trained_actor_<archetype>.pt,
+trained_critic_<archetype>.pt) - reload these for Scenario S3/S4
+fine-tuning or for real (non-random-actor) SHAP/LIME analysis,
+instead of retraining from scratch.
+--------------------------------------------------------------------------
+REAL 4-archetype Stage-1 federation complete.
+Total communication cost across 6 rounds x 4 clients: 0.4454 MB (0.0742 MB/round average)
+DP noise sigma (eps=8.0, delta=1e-05): 0.6056
+
+Honest scope note: this now covers all 4 archetypes required by the
+thesis (Contribution C1), but with a reduced round/step budget
+(6x2000) vs. the thesis's full 50-round schedule
+(Section 4.4). All 4 archetypes now use REAL measured weather (BDG2
+weather.csv for office/commercial/mixed-use; HomeC.csv's own weather
+columns for residential). Office/commercial/mixed-use still have zero
+PV generation (no solar data available for these specific BDG2
+buildings). Cost magnitudes ARE now normalised per 1,000 sqft using
+real BDG2 floor areas (residential uses an estimated area). Held-out
+evaluation results above are the low-variance, exploration-free
+metric suitable for the statistical protocol in Section 5.4.

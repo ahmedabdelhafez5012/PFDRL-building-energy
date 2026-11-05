@@ -1,0 +1,53 @@
+==============================================================================
+Scenario S3 - mu-sweep, starting from Stage-1 trained models
+mu values: [0.0, 0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 1.0]
+Fine-tune budget per mu: 3000 steps
+==============================================================================
+
+--- RESIDENTIAL ---
+  mu=0.00 | mean cost/ep =      3.378 (std 2.692) | cost/1000sqft =   1.4686
+  mu=0.01 | mean cost/ep =      3.359 (std 2.693) | cost/1000sqft =   1.4604
+  mu=0.05 | mean cost/ep =      3.357 (std 2.695) | cost/1000sqft =   1.4597
+  mu=0.10 | mean cost/ep =      3.330 (std 2.700) | cost/1000sqft =   1.4477
+  mu=0.20 | mean cost/ep =      3.281 (std 2.719) | cost/1000sqft =   1.4266
+  mu=0.50 | mean cost/ep =      3.307 (std 2.720) | cost/1000sqft =   1.4378
+  mu=0.80 | mean cost/ep =      3.271 (std 2.717) | cost/1000sqft =   1.4220
+  mu=1.00 | mean cost/ep =      4.232 (std 3.006) | cost/1000sqft =   1.8400
+
+--- OFFICE ---
+  mu=0.00 | mean cost/ep =    380.770 (std 63.868) | cost/1000sqft =   8.4167
+  mu=0.01 | mean cost/ep =    380.770 (std 63.868) | cost/1000sqft =   8.4167
+  mu=0.05 | mean cost/ep =    380.770 (std 63.868) | cost/1000sqft =   8.4167
+  mu=0.10 | mean cost/ep =    380.770 (std 63.868) | cost/1000sqft =   8.4167
+  mu=0.20 | mean cost/ep =    380.773 (std 63.865) | cost/1000sqft =   8.4167
+  mu=0.50 | mean cost/ep =    468.367 (std 92.315) | cost/1000sqft =  10.3529
+  mu=0.80 | mean cost/ep =    509.747 (std 83.427) | cost/1000sqft =  11.2676
+  mu=1.00 | mean cost/ep =    517.352 (std 96.081) | cost/1000sqft =  11.4357
+
+--- COMMERCIAL ---
+  mu=0.00 | mean cost/ep =    273.286 (std 56.771) | cost/1000sqft =   6.0429
+  mu=0.01 | mean cost/ep =    273.258 (std 56.722) | cost/1000sqft =   6.0423
+  mu=0.05 | mean cost/ep =    273.276 (std 56.739) | cost/1000sqft =   6.0427
+  mu=0.10 | mean cost/ep =    273.308 (std 56.773) | cost/1000sqft =   6.0434
+  mu=0.20 | mean cost/ep =    273.259 (std 56.725) | cost/1000sqft =   6.0423
+  mu=0.50 | mean cost/ep =    273.390 (std 56.836) | cost/1000sqft =   6.0452
+  mu=0.80 | mean cost/ep =    334.247 (std 62.770) | cost/1000sqft =   7.3909
+  mu=1.00 | mean cost/ep =    331.948 (std 62.894) | cost/1000sqft =   7.3401
+
+--- MIXED-USE ---
+  mu=0.00 | mean cost/ep =   1138.092 (std 228.559) | cost/1000sqft =   4.3413
+  mu=0.01 | mean cost/ep =   1138.091 (std 228.559) | cost/1000sqft =   4.3413
+  mu=0.05 | mean cost/ep =   1138.092 (std 228.559) | cost/1000sqft =   4.3413
+  mu=0.10 | mean cost/ep =   1138.094 (std 228.559) | cost/1000sqft =   4.3413
+  mu=0.20 | mean cost/ep =   1138.095 (std 228.558) | cost/1000sqft =   4.3413
+  mu=0.50 | mean cost/ep =   1358.315 (std 262.946) | cost/1000sqft =   5.1813
+  mu=0.80 | mean cost/ep =   1317.649 (std 275.360) | cost/1000sqft =   5.0262
+  mu=1.00 | mean cost/ep =   1271.288 (std 285.834) | cost/1000sqft =   4.8494
+
+==============================================================================
+SUMMARY: empirical mu-hat* (mu minimising held-out cost) per archetype
+==============================================================================
+  residential  | mu_hat* = 0.80 | mean cost/ep = 3.271
+  office       | mu_hat* = 0.00 | mean cost/ep = 380.770
+  commercial   | mu_hat* = 0.01 | mean cost/ep = 273.258
+  mixed-use    | mu_hat* = 0.01 | mean cost/ep = 1138.091

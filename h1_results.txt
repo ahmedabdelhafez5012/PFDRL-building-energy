@@ -1,0 +1,66 @@
+==============================================================================
+Multi-seed H1 test: cross-archetype parity (DDPG/B1 ratio)
+N_SEEDS=8
+==============================================================================
+
+--- Seed 0 ---
+  residential  | DDPG=     4.524 | B1=     4.081 | ratio=1.1085
+  office       | DDPG=   518.095 | B1=   517.700 | ratio=1.0008
+  commercial   | DDPG=   326.003 | B1=   358.119 | ratio=0.9103
+  mixed-use    | DDPG=  1203.140 | B1=  1316.009 | ratio=0.9142
+
+--- Seed 1 ---
+  residential  | DDPG=     3.479 | B1=     3.803 | ratio=0.9149
+  office       | DDPG=   625.310 | B1=   660.062 | ratio=0.9474
+  commercial   | DDPG=   323.182 | B1=   360.302 | ratio=0.8970
+  mixed-use    | DDPG=  1127.912 | B1=  1164.663 | ratio=0.9684
+
+--- Seed 2 ---
+  residential  | DDPG=     2.117 | B1=     1.772 | ratio=1.1948
+  office       | DDPG=   547.951 | B1=   524.737 | ratio=1.0442
+  commercial   | DDPG=   341.156 | B1=   366.536 | ratio=0.9308
+  mixed-use    | DDPG=  1421.363 | B1=  1621.809 | ratio=0.8764
+
+--- Seed 3 ---
+  residential  | DDPG=     2.070 | B1=     2.670 | ratio=0.7751
+  office       | DDPG=   563.100 | B1=   581.953 | ratio=0.9676
+  commercial   | DDPG=   331.320 | B1=   373.969 | ratio=0.8860
+  mixed-use    | DDPG=  1247.995 | B1=  1336.953 | ratio=0.9335
+
+--- Seed 4 ---
+  residential  | DDPG=     3.301 | B1=     3.412 | ratio=0.9677
+  office       | DDPG=   537.629 | B1=   526.392 | ratio=1.0213
+  commercial   | DDPG=   312.426 | B1=   333.207 | ratio=0.9376
+  mixed-use    | DDPG=  1213.220 | B1=  1239.291 | ratio=0.9790
+
+--- Seed 5 ---
+  residential  | DDPG=     3.325 | B1=     4.002 | ratio=0.8310
+  office       | DDPG=   489.840 | B1=   517.524 | ratio=0.9465
+  commercial   | DDPG=   322.802 | B1=   347.020 | ratio=0.9302
+  mixed-use    | DDPG=  1368.582 | B1=  1329.709 | ratio=1.0292
+
+--- Seed 6 ---
+  residential  | DDPG=     3.846 | B1=     4.328 | ratio=0.8887
+  office       | DDPG=   528.722 | B1=   577.262 | ratio=0.9159
+  commercial   | DDPG=   308.119 | B1=   336.096 | ratio=0.9168
+  mixed-use    | DDPG=  1331.550 | B1=  1361.041 | ratio=0.9783
+
+--- Seed 7 ---
+  residential  | DDPG=     3.278 | B1=     3.207 | ratio=1.0220
+  office       | DDPG=   473.071 | B1=   513.126 | ratio=0.9219
+  commercial   | DDPG=   313.313 | B1=   329.776 | ratio=0.9501
+  mixed-use    | DDPG=  1350.813 | B1=  1457.999 | ratio=0.9265
+
+==============================================================================
+KRUSKAL-WALLIS TEST (H1: ratio distributions are similar across archetypes)
+==============================================================================
+H-statistic=3.5369 | p=0.3160 | not significant - consistent with H1 (parity)
+
+Per-archetype ratio summary (ratio < 1.0 means DDPG beats B1):
+  residential  | mean=0.9628 (+/-0.1318) | beats B1 in 5/8 seeds
+  office       | mean=0.9707 (+/-0.0439) | beats B1 in 5/8 seeds
+  commercial   | mean=0.9198 (+/-0.0201) | beats B1 in 8/8 seeds
+  mixed-use    | mean=0.9507 (+/-0.0444) | beats B1 in 7/8 seeds
+
+Raw per-seed ratios:
+{'residential': [1.1084698407584535, 0.91493593320735, 1.1947919276142636, 0.7750815307341484, 0.9677058751266101, 0.8309728443021438, 0.8886855335336962, 1.0219883810081087], 'office': [1.0007628839697778, 0.947350161181286, 1.0442383621925275, 0.9676045727355166, 1.0213476373171415, 0.9465075901603004, 0.9159126984011385, 0.9219385263681004], 'commercial': [0.9103186304726125, 0.8969744599018541, 0.9307572259471416, 0.885955083614735, 0.9376344286245025, 0.930211275062852, 0.9167594265593899, 0.950079421278939], 'mixed-use': [0.9142335602019019, 0.9684456118707165, 0.8764062310997357, 0.933462361129917, 0.9789630053879783, 1.0292344505016155, 0.9783326969272977, 0.9264838774662766]}
