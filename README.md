@@ -1,4 +1,4 @@
-﻿# PFDRL: federated deep reinforcement learning for building energy management
+# PFDRL: federated deep reinforcement learning for building energy management
 
 
 
