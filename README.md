@@ -1,4 +1,4 @@
-\# PFDRL: federated deep reinforcement learning for building energy management
+﻿# PFDRL: federated deep reinforcement learning for building energy management
 
 
 
@@ -8,7 +8,7 @@ Code, analysis scripts and aggregated results for the M.Sc. thesis
 
 (Ahmed A. A. Abdelgawad, Capital University (formerly Helwan University), Faculty of Engineering, Department of Smart Electrical Grids Engineering, 2026).
 
-\## Status
+## Status
 
 Research code, not a product. The main finding is negative: in this simplified environment, federation did
 
@@ -20,7 +20,7 @@ corrective experiments (exp\_lean.py, exp\_multi.py) supersede it for the federa
 
 
 
-\## Contents
+## Contents
 
 Core modules
 
@@ -80,13 +80,13 @@ results/: aggregated per-seed results (JSON). Text logs of the runs (output\_log
 
 
 
-\## Data
+## Data
 
 Raw data are not included. See DATA.md.
 
 
 
-\## Software
+## Software
 
 Python 3.14 was used. Library minimum versions are in requirements.txt:
 
@@ -94,7 +94,7 @@ pip install -r requirements.txt
 
 
 
-\## Reproducing the multi-building experiments
+## Reproducing the multi-building experiments
 
 python build\_multi\_data.py --k 3
 
@@ -114,7 +114,7 @@ Training ran at roughly 75 environment steps per second; one seed of the three c
 
 
 
-\## License and citation
+## License and citation
 
 MIT License (see LICENSE). Please cite the thesis and this archive (see CITATION.cff).
 
