@@ -6,9 +6,7 @@ Code, analysis scripts and aggregated results for the M.Sc. thesis
 
 "Energy Management in Smart Buildings with Privacy Preservation Using Federated Deep Reinforcement Learning"
 
-(Ahmed A. A. Khater, Helwan University, Faculty of Engineering, Department of Smart Electrical Grids Engineering, 2026).
-
-
+(Ahmed A. A. Abdelgawad, Capital University (formerly Helwan University), Faculty of Engineering, Department of Smart Electrical Grids Engineering, 2026).
 
 \## Status
 
