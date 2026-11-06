@@ -16,7 +16,7 @@ not reduce cost relative to independent training. The original campaign had impl
 
 the thesis (Limitation L10: the FedProx arm applied no proximal term and only critics were aggregated). The
 
-corrective experiments (exp\_lean.py, exp\_multi.py) supersede it for the federation questions.
+corrective experiments (exp_lean.py, exp_multi.py) supersede it for the federation questions.
 
 
 
@@ -24,59 +24,61 @@ corrective experiments (exp\_lean.py, exp\_multi.py) supersede it for the federa
 
 Core modules
 
-\- environment.py: building energy environment (15-min steps, seven-variable state, HVAC and battery actions)
+- environment.py: building energy environment (15-min steps, seven-variable state, HVAC and battery actions)
 
-\- ddpg\_agent.py: DDPG agent
+- ddpg_agent.py: DDPG agent
 
-\- federated\_learning.py: aggregation and noise injection
+- federated_learning.py: aggregation and noise injection
 
-\- xai\_module.py: SHAP and LIME explanations of the battery action
+- xai_module.py: SHAP and LIME explanations of the battery action
 
-\- data\_loader.py, data\_loader\_office.py, data\_loader\_commercial.py, data\_loader\_mixeduse.py: archetype data loaders
+- data_loader.py, data_loader_office.py, data_loader_commercial.py, data_loader_mixeduse.py: archetype data loaders
 
 
 
 Baselines
 
-\- baseline\_b1\_rule\_based.py, baseline\_b2\_mpc.py, compare\_baselines.py
+- baseline_b1_rule_based.py, baseline_b2_mpc.py, compare_baselines.py
 
 
 
 Original campaign (H1-H4, B1-B4)
 
-\- main.py (early smoke test), main\_real\_federation.py
+- main.py (early smoke test), main_real_federation.py
 
-\- scenario\_s3\_mu\_sweep.py, scenario\_s4\_epsilon\_sweep.py, lambda\_sweep.py (superseded)
+- scenario_s3_mu_sweep.py, scenario_s4_epsilon_sweep.py, lambda_sweep.py (superseded)
 
-\- multi\_seed\_h1\_test.py, multi\_seed\_h2\_test.py, multi\_seed\_h3\_latency\_test.py, multi\_seed\_h4\_test.py
+- multi_seed_h1_test.py, multi_seed_h2_test.py, multi_seed_h3_latency_test.py, multi_seed_h4_test.py
 
-\- 00\_power\_analysis.py, 01\_full\_ablation\_b1\_b4.py, 02\_extended\_n\_multiseed.py, 03\_multiseed\_s3\_s4.py, 04\_merge\_and\_generate\_tables.py
+- 00_power_analysis.py, 01_full_ablation_b1_b4.py, 02_extended_n_multiseed.py, 03_multiseed_s3_s4.py, 04_merge_and_generate_tables.py
 
-\- 05\_reward\_normalisation\_ablation.py, 06\_capacity\_interference\_pilot.py, 07\_weighted\_sampling\_pilot.py (reward-scale diagnosis)
+- 05_reward_normalisation_ablation.py, 06_capacity_interference_pilot.py, 07_weighted_sampling_pilot.py (reward-scale diagnosis)
 
-\- 09a\_inspect\_residential\_sources.py, 09b\_build\_residential\_expansion.py, 10\_residential\_scale\_federation.py (residential scale-up)
+- 09a_inspect_residential_sources.py, 09b_build_residential_expansion.py, 10_residential_scale_federation.py (residential scale-up)
 
-\- 15\_b3\_vs\_b2.py (paired B3 vs B2 test, N=30)
+- 15_b3_vs_b2.py (paired B3 vs B2 test, N=30)
 
-\- 13\_resolve\_open\_items.py, 14\_check\_residential.py, diagnose\_office\_actor.py (audit utilities)
+- 13_resolve_open_items.py, 14_check_residential.py, diagnose_office_actor.py (audit utilities)
 
-\- extract\_s5\_demo\_decisions.py (decisions shown in the operator survey)
+- extract_s5_demo_decisions.py (decisions shown in the operator survey)
+
+- analyze_s5_results.py (reproduces Tables E.1 and E.2 from the private survey file; the data are not included)
 
 
 
 Corrective experiments (supersede the original campaign for the federation questions)
 
-\- exp\_lean.py: data-scarcity and cold-start pilots
+- exp_lean.py: data-scarcity and cold-start pilots
 
-\- build\_multi\_data.py, exp\_multi.py: multi-building experiments, cold start, compute-controlled check
+- build_multi_data.py, exp_multi.py: multi-building experiments, cold start, compute-controlled check
 
-\- equiv\_test.py: equivalence analysis
+- equiv_test.py: equivalence analysis
 
-\- patch\_control.py, fix\_cold.py: patches kept for provenance (exp\_multi.py and equiv\_test.py here already include them)
+- patch_control.py, fix_cold.py: patches kept for provenance (exp_multi.py and equiv_test.py here already include them)
 
 
 
-results/: aggregated per-seed results (JSON). Text logs of the runs (output\_log\*.txt, \*\_results.txt) are included.
+results/: aggregated per-seed results (JSON). Text logs of the runs (output_log*.txt, *_results.txt) are included.
 
 
 
@@ -96,19 +98,19 @@ pip install -r requirements.txt
 
 ## Reproducing the multi-building experiments
 
-python build\_multi\_data.py --k 3
+python build_multi_data.py --k 3
 
-python exp\_multi.py --mode train --k 3 --n\_seeds 8 --data\_frac 0.2
+python exp_multi.py --mode train --k 3 --n_seeds 8 --data_frac 0.2
 
-python exp\_multi.py --mode train --k 3 --n\_seeds 24 --data\_frac 0.2 --conditions indep fed\_arch
+python exp_multi.py --mode train --k 3 --n_seeds 24 --data_frac 0.2 --conditions indep fed_arch
 
-python exp\_multi.py --mode train --k 3 --n\_seeds 12 --data\_frac 0.2 --conditions indep3x --only\_arch residential
+python exp_multi.py --mode train --k 3 --n_seeds 12 --data_frac 0.2 --conditions indep3x --only_arch residential
 
-python exp\_multi.py --mode cold --k 3 --n\_seeds 6 --rounds 4 --steps 800
+python exp_multi.py --mode cold --k 3 --n_seeds 6 --rounds 4 --steps 800
 
-python exp\_multi.py --mode analyze
+python exp_multi.py --mode analyze
 
-python equiv\_test.py --folder results\\fed\_multi\\frac0.2 --margin 2
+python equiv_test.py --folder results\\fed_multi\\frac0.2 --margin 2
 
 Training ran at roughly 75 environment steps per second; one seed of the three conditions on 12 buildings took about 35 minutes.
 
