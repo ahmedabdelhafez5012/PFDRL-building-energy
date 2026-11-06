@@ -36,9 +36,10 @@ Research code, not a product. The main finding is negative: in this simplified e
 
 ### Corrective experiments (supersede the original campaign for the federation questions)
 - `exp_lean.py`: data-scarcity and cold-start pilots
-- `build_multi_data.py`, `exp_multi.py`: multi-building experiments, cold start, compute-controlled check
+- `build_multi_data.py`, `exp_multi.py`: multi-building experiments, cold start, compute-controlled check, centralised-pooling test
 - `equiv_test.py`: equivalence analysis
-- `patch_control.py`, `fix_cold.py`: patches kept for provenance (`exp_multi.py` and `equiv_test.py` here already include them)
+- `patch_control.py`, `fix_cold.py`, `patch_central.py`: patches kept for provenance (`exp_multi.py` and `equiv_test.py` here already include them)
+- `scale_vs_penalty.py`: relates each building's reward scale to its centralised-pooling penalty
 
 `results/` holds the aggregated per-seed results (JSON). Text logs of the runs (`output_log*.txt`, `*_results.txt`) are included.
 
@@ -48,7 +49,7 @@ Raw data are not included. See [DATA.md](DATA.md).
 
 ## Software
 
-Python 3.14 was used. Library minimum versions are in `requirements.txt`. Install them with:
+Python 3.12 was used for the later experiments (3.14 for the original campaign). Library minimum versions are in `requirements.txt`. Install them with:
 
     pip install -r requirements.txt
 
@@ -58,9 +59,11 @@ Python 3.14 was used. Library minimum versions are in `requirements.txt`. Instal
     python exp_multi.py --mode train --k 3 --n_seeds 8 --data_frac 0.2
     python exp_multi.py --mode train --k 3 --n_seeds 24 --data_frac 0.2 --conditions indep fed_arch
     python exp_multi.py --mode train --k 3 --n_seeds 12 --data_frac 0.2 --conditions indep3x --only_arch residential
+    python exp_multi.py --mode train --k 3 --n_seeds 8 --data_frac 0.2 --conditions indep_raw central_raw central_norm
     python exp_multi.py --mode cold --k 3 --n_seeds 6 --rounds 4 --steps 800
     python exp_multi.py --mode analyze
     python equiv_test.py --folder results\fed_multi\frac0.2 --margin 2
+    python scale_vs_penalty.py
 
 Training ran at roughly 75 environment steps per second; one seed of the three conditions on 12 buildings took about 35 minutes.
 
