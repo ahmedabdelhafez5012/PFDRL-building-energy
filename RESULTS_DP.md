@@ -76,11 +76,30 @@ Privacy–utility frontier versus the no-noise configuration (all buildings; 4 s
 
 Control: the last layer only with 3 clients in client mode (noise/signal 35) fails as predicted, giving +321.3% discomfort at ε = 8 (4 seeds).
 
+Equivalence of the noise effect (`dp_summary.py`, 90% CI = TOST at 5%, 12 seeds): cost [−0.87%, +2.35%], so equivalence within ±2% is narrowly not established; discomfort [−9.2%, +41.7%].
+
+## Experiment C — last layer only, trusted aggregator, 16 residential clients, 400 fine-tuning steps
+
+Results in `results/fed_dp_res16_server_head_ft400/frac0.2` (the 16 residential clients of Appendix C.15; independent training, B1 and no control rerun on the same buildings; 8 seeds; noise/signal 1.9).
+
+| Comparison at ε = 8 | Cost | p | Discomfort | p |
+| --- | --- | --- | --- | --- |
+| vs independent training | −0.16% | 0.95 | +23.7% | 0.055 |
+| No-noise configuration vs independent training | +1.14% | 0.46 | +18.3% | 0.11 |
+| vs no-noise configuration (noise effect) | −1.27% | 0.31 | +5.3% | 0.25 |
+| vs B1 | +11.13% | 0.0078 | −11.7% | 0.016 |
+
+Equivalence of the noise effect: cost [−3.05%, +0.51%], discomfort [−1.6%, +12.2%]. The discomfort penalty of the large homogeneous federation is about half that of the mixed-type federation in Experiment B, and the noise effect is bounded to at most about 12%. Clients 1–15 use a modelled HVAC load.
+
+## Summary figure
+
+`results/dp_nsr_figure.png` (produced by `dp_summary.py`) plots discomfort against the expected noise-to-signal ratio for every configuration and ε: the penalty is small near a ratio of one and saturates at about +340% to +400% above a ratio of about 20.
+
 ## Interpretation and limits
 
 Formal DP at ε = 8 is workable only when the noise-to-signal ratio is small: few shared parameters, many clients and a trusted aggregator. This creates a design tension. Privacy needs many clients, while data heterogeneity favours few similar ones.
 
-Limits: the frontier points other than ε = 8 use 4 seeds; `server` mode assumes a trusted aggregator; local fine-tuning adds 10% to the training budget of independent training; all runs use the reduced 0.2 data budget; non-significance is not equivalence (no TOST was run).
+Limits: the frontier points other than ε = 8 use 4 seeds; `server` mode assumes a trusted aggregator; local fine-tuning adds 10% to the training budget of independent training; all runs use the reduced 0.2 data budget; non-significance is not equivalence (see the TOST intervals above).
 
 ## Reproduce
 
@@ -91,7 +110,9 @@ python exp_dp.py --mode train --n_seeds 8 --eps 128 64 32 16 8
 python exp_dp.py --mode train --share head --dp_mode server --group all --finetune 400 --n_seeds 12 --eps 8
 python exp_dp.py --mode train --share head --dp_mode server --group all --finetune 400 --n_seeds 4 --eps 16 4 1
 python exp_dp.py --mode train --share head --n_seeds 4 --eps 8
-python exp_dp.py --mode analyze [same --share/--dp_mode/--group/--finetune options]
+python exp_dp.py --mode train --clients res16 --share head --dp_mode server --finetune 400 --n_seeds 8 --eps 8
+python exp_dp.py --mode analyze [same --clients/--share/--dp_mode/--group/--finetune options]
+python dp_summary.py --folder results/fed_dp_all_server_head_ft400/frac0.2
 ```
 
 `exp_multi.py` now ends with `if __name__ == "__main__": main()`, so it can be imported without starting a run.
