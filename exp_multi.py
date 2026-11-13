@@ -238,4 +238,5 @@ def main():
                 r = cold_one(h, cl, seed, a.rounds, steps, a.cold_steps, norm)
                 if r is None: continue
                 print("seed", seed, "cold", h["arch"], h["id"], flush=True); json.dump(r, open(p, "w"))
-main()
+if __name__ == "__main__":
+    main()
