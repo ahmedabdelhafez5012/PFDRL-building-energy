@@ -38,6 +38,15 @@ OUT = "results/fed_dp"
 ALPHAS = [1 + x / 10.0 for x in range(1, 100)] + list(range(12, 64)) + [128, 256, 512]
 
 
+def residential_clients(n=16):
+    """The real residential clients of Appendix C.15 (data/residential_scale_clients)."""
+    import re as _re
+    fs = glob.glob(os.path.join("data", "residential_scale_clients", "residential_client*_15min.csv"))
+    fs = sorted(fs, key=lambda x: int(_re.search(r"client(\d+)_", x).group(1)))[:n]
+    if len(fs) < n: raise SystemExit("Found %d residential client files, need %d (run 10_residential_scale_federation.py first)." % (len(fs), n))
+    return [{"arch": "residential", "id": "client%d" % i, "path": f_} for i, f_ in enumerate(fs)]
+
+
 # ---------------------------------------------------------------- accounting
 def rdp_to_eps(z, rounds, delta, sens):
     """Composed epsilon for R full-participation Gaussian releases.
@@ -156,15 +165,18 @@ def run(cond, cl, seed, R, steps, norm, clip, z, mode, group, share="all", finet
 
 
 # ---------------------------------------------------------------- analysis
-def out_dir(frac, group, mode, share="all", finetune=0):
-    tag = ("" if group == "arch" else "_all") + ("" if mode == "client" else "_server") + \
+def out_dir(frac, group, mode, share="all", finetune=0, clients="multi"):
+    tag = ("" if clients == "multi" else "_" + clients) + \
+          ("" if group == "arch" else "_all") + ("" if mode == "client" else "_server") + \
           ("" if share == "all" else "_head") + ("" if finetune == 0 else "_ft%d" % finetune)
     return os.path.join(OUT + tag, "frac%g" % frac)
 
 
-def analyze(frac, group="arch", mode="client", share="all", finetune=0):
-    ref_dir = os.path.join(M.OUT, "frac%g" % frac); dp_dir = out_dir(frac, group, mode, share, finetune)
+def analyze(frac, group="arch", mode="client", share="all", finetune=0, clients="multi"):
+    dp_dir = out_dir(frac, group, mode, share, finetune, clients)
+    ref_dir = os.path.join(M.OUT, "frac%g" % frac) if clients == "multi" else dp_dir   # res16 stores its own baselines
     ref = M.load(ref_dir); dp = M.load(dp_dir)
+    dp = {c: v for c, v in dp.items() if c == "fedclip" or c.startswith("dp_eps")}
     if "indep" not in ref: print("No indep results in", ref_dir, "- run exp_multi.py first."); return
     conds = sorted(dp, key=lambda c: (c != "fedclip", -float(c[6:]) if c.startswith("dp_eps") else 0))
     if "fedclip" in dp: ref = dict(ref); ref["fedclip (same budget, no noise)"] = dp["fedclip"]
@@ -205,6 +217,7 @@ def main():
     ap.add_argument("--delta", type=float, default=1e-5); ap.add_argument("--clip", type=float, default=1.0)
     ap.add_argument("--dp_mode", default="client", choices=["client", "server"])
     ap.add_argument("--no_fedclip", action="store_true")
+    ap.add_argument("--clients", default="multi", choices=["multi", "res16"], help="12-building corrective set, or the 16 real residential clients of C.15")
     ap.add_argument("--share", default="all", choices=["all", "head"], help="federate the whole network or only the final layer of actor and critic")
     ap.add_argument("--finetune", type=int, default=0, help="local fine-tuning steps after the last round (no release)")
     ap.add_argument("--group", default="arch", choices=["arch", "all"], help="federate within each archetype (3 clients) or across all 12 buildings")
@@ -214,9 +227,9 @@ def main():
             z = calibrate_z(e, a.rounds, a.delta, sens)
             print("eps=%g delta=%g R=%d mode=%s -> noise multiplier z=%.3f (check: eps=%.3f)" % (e, a.delta, a.rounds, a.dp_mode, z, rdp_to_eps(z, a.rounds, a.delta, sens)))
         return
-    if a.mode == "analyze": return analyze(a.data_frac, a.group, a.dp_mode, a.share, a.finetune)
-    M.lazy(); cl = M.clients(a.k); norm = M.get_norm(cl); steps = max(100, int(round(a.steps * a.data_frac)))
-    f = out_dir(a.data_frac, a.group, a.dp_mode, a.share, a.finetune); os.makedirs(f, exist_ok=True)
+    if a.mode == "analyze": return analyze(a.data_frac, a.group, a.dp_mode, a.share, a.finetune, a.clients)
+    M.lazy(); cl = M.clients(a.k) if a.clients == "multi" else residential_clients(16); norm = M.get_norm(cl); steps = max(100, int(round(a.steps * a.data_frac)))
+    f = out_dir(a.data_frac, a.group, a.dp_mode, a.share, a.finetune, a.clients); os.makedirs(f, exist_ok=True)
     plan = ([] if a.no_fedclip else [("fedclip", 0.0)]) + [("dp_eps%g" % e, calibrate_z(e, a.rounds, a.delta, sens)) for e in a.eps]
     d_shared = int(shared_mask(M.new_agent(M.make_env(cl[0]["path"], 0, norm), 1), a.share).sum())
     n_cl = len(cl) if a.group == "all" else len([c for c in cl if c["arch"] == cl[0]["arch"]])
@@ -225,6 +238,15 @@ def main():
         nr = z * math.sqrt(d_shared) / (math.sqrt(n_cl) if a.dp_mode == "client" else n_cl)
         print("%-10s z = %.3f  | expected noise norm on the averaged update / clipped signal C: %.1f" % (name, z, nr), flush=True)
     for seed in range(a.n_seeds):
+        if a.clients != "multi":                                  # own baselines for the new client set
+            for ref_ in ("b1", "noop"):
+                p = os.path.join(f, "%s_s%d.json" % (ref_, seed))
+                if not os.path.exists(p):
+                    json.dump({c["arch"] + "|" + c["id"]: dict(zip(("cost", "disc"), M.ev(None, c["path"], seed, ref_))) for c in cl}, open(p, "w"))
+            p = os.path.join(f, "indep_s%d.json" % seed)
+            if not os.path.exists(p):
+                print("seed", seed, "indep", flush=True)
+                json.dump(M.run_condition("indep", cl, seed, a.rounds, steps, norm), open(p, "w"))
         for name, z in plan:
             p = os.path.join(f, "%s_s%d.json" % (name, seed))
             if os.path.exists(p): continue
