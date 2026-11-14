@@ -23,6 +23,7 @@ CONFIGS = [  # folder, label, d, clients per federation, marker
     ("results/fed_dp_all_server_head/frac0.2",         "Last layer, 12 clients, trusted aggregator",   D_HEAD, 12, "^"),
     ("results/fed_dp_all_server_head_ft400/frac0.2",   "B: last layer, 12 clients, aggregator + fine-tune", D_HEAD, 12, "*"),
     ("results/fed_dp_res16_server_head_ft400/frac0.2", "C: last layer, 16 residential, aggregator + fine-tune", D_HEAD, 16, "P"),
+    ("results/fed_dp_res16tz_server_head_ft400/frac0.2", "C': as C, corrected residential HVAC timing", D_HEAD, 16, "h"),
 ]
 
 

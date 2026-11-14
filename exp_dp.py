@@ -38,10 +38,13 @@ OUT = "results/fed_dp"
 ALPHAS = [1 + x / 10.0 for x in range(1, 100)] + list(range(12, 64)) + [128, 256, 512]
 
 
+RES_DIR = os.path.join("data", "residential_scale_clients")
+
+
 def residential_clients(n=16):
-    """The real residential clients of Appendix C.15 (data/residential_scale_clients)."""
+    """The real residential clients of Appendix C.15 (data/residential_scale_clients, or --res_dir)."""
     import re as _re
-    fs = glob.glob(os.path.join("data", "residential_scale_clients", "residential_client*_15min.csv"))
+    fs = glob.glob(os.path.join(RES_DIR, "residential_client*_15min.csv"))
     fs = sorted(fs, key=lambda x: int(_re.search(r"client(\d+)_", x).group(1)))[:n]
     if len(fs) < n: raise SystemExit("Found %d residential client files, need %d (run 10_residential_scale_federation.py first)." % (len(fs), n))
     return [{"arch": "residential", "id": "client%d" % i, "path": f_} for i, f_ in enumerate(fs)]
@@ -218,10 +221,14 @@ def main():
     ap.add_argument("--dp_mode", default="client", choices=["client", "server"])
     ap.add_argument("--no_fedclip", action="store_true")
     ap.add_argument("--clients", default="multi", choices=["multi", "res16"], help="12-building corrective set, or the 16 real residential clients of C.15")
+    ap.add_argument("--res_dir", default="", help="folder of the residential clients for --clients res16 (e.g. data/residential_scale_clients_tzfix)")
     ap.add_argument("--share", default="all", choices=["all", "head"], help="federate the whole network or only the final layer of actor and critic")
     ap.add_argument("--finetune", type=int, default=0, help="local fine-tuning steps after the last round (no release)")
     ap.add_argument("--group", default="arch", choices=["arch", "all"], help="federate within each archetype (3 clients) or across all 12 buildings")
     a = ap.parse_args(); sens = 2.0 if a.dp_mode == "client" else 1.0
+    if a.res_dir:                                   # corrected residential data -> separate results folder
+        global RES_DIR; RES_DIR = a.res_dir
+        if a.clients == "res16": a.clients = "res16tz"
     if a.mode == "sigma":
         for e in a.eps:
             z = calibrate_z(e, a.rounds, a.delta, sens)

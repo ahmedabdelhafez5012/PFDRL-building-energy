@@ -91,6 +91,19 @@ Results in `results/fed_dp_res16_server_head_ft400/frac0.2` (the 16 residential 
 
 Equivalence of the noise effect: cost [−3.05%, +0.51%], discomfort [−1.6%, +12.2%]. The discomfort penalty of the large homogeneous federation is about half that of the mixed-type federation in Experiment B, and the noise effect is bounded to at most about 12%. Clients 1–15 use a modelled HVAC load.
 
+## Robustness check C′ — Experiment C on corrected residential HVAC timing
+
+The modelled HVAC series of the 15 Ausgrid clients was fitted on UTC clock hours and applied in Sydney local time, so its peak fell near midnight. `09c_build_residential_tzfix.py` refits the time-of-day terms on Austin local time (peak near 19:00; R² = 0.176; mean 1.25 kW). Results in `results/fed_dp_res16tz_server_head_ft400/frac0.2` (8 seeds; `exp_dp.py --clients res16 --res_dir data/residential_scale_clients_tzfix`).
+
+| Comparison at ε = 8 | Cost | p | Discomfort | p |
+| --- | --- | --- | --- | --- |
+| vs independent training | −3.66% | 0.023 | +29.6% | 0.0078 |
+| No-noise configuration vs independent training | −3.94% | 0.016 | +27.1% | 0.0078 |
+| vs no-noise configuration (noise effect) | +0.36% | 0.74 | +2.9% | 0.64 |
+| vs B1 | +11.55% | 0.0078 | +17.6% | 0.0078 |
+
+Equivalence of the noise effect: cost [−1.85%, +2.58%], discomfort [−4.9%, +10.6%]. The bound on the privacy noise survives the correction; the penalty against independent training comes from sharing the final layer, not from the noise.
+
 ## Summary figure
 
 `results/dp_nsr_figure.png` (produced by `dp_summary.py`) plots discomfort against the expected noise-to-signal ratio for every configuration and ε: the penalty is small near a ratio of one and saturates at about +340% to +400% above a ratio of about 20.
@@ -113,6 +126,8 @@ python exp_dp.py --mode train --share head --n_seeds 4 --eps 8
 python exp_dp.py --mode train --clients res16 --share head --dp_mode server --finetune 400 --n_seeds 8 --eps 8
 python exp_dp.py --mode analyze [same --clients/--share/--dp_mode/--group/--finetune options]
 python dp_summary.py --folder results/fed_dp_all_server_head_ft400/frac0.2
+python 09c_build_residential_tzfix.py
+python exp_dp.py --mode train --clients res16 --res_dir data/residential_scale_clients_tzfix --share head --dp_mode server --finetune 400 --n_seeds 8 --eps 8
 ```
 
 `exp_multi.py` now ends with `if __name__ == "__main__": main()`, so it can be imported without starting a run.
